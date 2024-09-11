@@ -135,14 +135,14 @@ try:
                         try:
                                 driver.get(f'https://web.whatsapp.com/send/?phone=55${contato}&text={texto}')
                                 campo_texto = wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')))
-                                sleep(4)
+                                sleep(5)
                                 while True:
                                     campo_texto.send_keys(Keys.ENTER)
-                                    sleep(1)
-                                    if driver.find_elements(By.XPATH,"//span[@dir='ltr']")[-1].text.strip() == mensagem.replace('*','').strip():
+                                    sleep(2)
+                                    if assinatura in driver.find_elements(By.XPATH,"//span[@dir='ltr']")[-1].text:
                                         df_aviso.loc[i,'Controle'] = 'Enviado'
                                         break
-                                sleep(4)
+                                sleep(5)
                         except NoSuchElementException: #Exceção para quando não existe whatsapp cadastrado no número
                                 df_aviso.loc[i,'Controle'] = 'Falha no envio. Verificar contato.'
                                 continue
